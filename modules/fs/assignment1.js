@@ -1,3 +1,5 @@
+// sync code
+
 const fs = require('fs');
 
 const f1 = fs.readFileSync('greet.txt', 'utf-8');
