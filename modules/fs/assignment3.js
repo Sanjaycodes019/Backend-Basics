@@ -7,9 +7,9 @@ async function copy() {
 
     await fs.writeFile('third.txt', data1 + '\n' + data2);
 
-    console.log('Files copied successfully!');
+    console.log('Files copied successfully into third.txt');
   } catch (error) {
-    console.log(error);
+    console.log('Error:', error);
   }
 }
 
