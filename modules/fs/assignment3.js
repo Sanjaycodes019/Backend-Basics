@@ -12,5 +12,4 @@ async function copy() {
     console.log('Error:', error);
   }
 }
-
 copy();
