@@ -16,7 +16,7 @@
 
 
 const fs = require('fs');
-const logFile = 'activity.txt';
+const logFile = 'activity.pdf';
 function logTimestamp(){
     const timestamp = new Date().toLocaleString();
     console.log(timestamp);
