@@ -1,10 +1,14 @@
 const http = require('http');
 const fs = require('fs');
-const querystring = require('querystring'); // To parse form data
+const querystring = require('querystring');
+
+const PORT = 3000;
 
 const server = http.createServer((req, res) => {
+    console.log('Requested URL:', req.url, 'Method:', req.method);
+
     if (req.url === '/login' && req.method === 'GET') {
-        // Serve login HTML page
+        // Serve login.html page
         fs.readFile('./login.html', (err, data) => {
             if (err) {
                 res.writeHead(500, { 'Content-Type': 'text/plain' });
@@ -23,19 +27,16 @@ const server = http.createServer((req, res) => {
         req.on('end', () => {
             const formData = querystring.parse(body);
             console.log('Received login data:', formData);
-            // You can implement login validation here
-
-            // Send a response back
             res.writeHead(200, { 'Content-Type': 'text/plain' });
             res.end(`Hello, ${formData.username}! You have logged in successfully.`);
         });
     } else {
-        // Handle other routes or methods
+        // Route not found
         res.writeHead(404, { 'Content-Type': 'text/plain' });
         res.end('Not Found');
     }
 });
 
-server.listen(3000, () => {
-    console.log('Server started on http://localhost:3000');
+server.listen(PORT, () => {
+    console.log(`Server started on port ${PORT}...`);
 });
