@@ -15,6 +15,9 @@ app.post("/sendData", (req, res) => {
     console.log(req.body);
 });
 
+app.get('/style.css', (req, res)=>{
+    res.sendFile(__dirname, "style.css")
+})
 // Start server
 app.listen(3000, () => {
     console.log("Server started on http://localhost:3000");
