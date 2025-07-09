@@ -1,27 +1,21 @@
-// http server using expressJS
-
 const express = require('express');
-// const app = express();
-
-// // Route for Home Page
-// app.get('/', (req, res) => {
-//   res.send('Welcome to Express.js Backend');
-// });
-
-// // Start server
-// app.listen(3000, () => {
-//   console.log('Server running on http://localhost:3000');
-// });
-
+const path = require('path');
 const app = express();
-app.listen(3000, ()=>{
-    console.log("server started...");
-})
 
-app.get("/", (req, res)=>{
-    res.sendFile(__dirname, "/login.html");
-})
+// Middleware to parse form data
+app.use(express.urlencoded({ extended: true }));
 
-app.post('/sendData', (req, res)=>{
-    res. 
-})
+// Route: Serve login form
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "login.html"));
+});
+
+// Route: Handle form submission
+app.post("/sendData", (req, res) => {
+    console.log(req.body);
+});
+
+// Start server
+app.listen(3000, () => {
+    console.log("Server started on http://localhost:3000");
+});
