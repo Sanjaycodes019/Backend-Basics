@@ -1,7 +1,7 @@
-// Scans myNotes/
-// Filters only .txt files
-// Creates backupNotes/ if it doesn't exist
-// Copies only .txt files and shows success messages
+// Scan myNotes
+// Filter only .txt files
+// Create backupNotes/ if it doesn't exist
+// Copiy only.txt files and shows success messages
 const fs = require('fs');
 
 const source = __dirname + '/myNotes';
