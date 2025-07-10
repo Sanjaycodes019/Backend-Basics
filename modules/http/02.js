@@ -16,7 +16,7 @@ app.post("/sendData", (req, res) => {
 });
 
 app.get('/style.css', (req, res)=>{
-    res.sendFile(__dirname, "style.css")
+    res.sendFile(__dirname, "/modules/http/public/style.css")
 })
 // Start server
 app.listen(3000, () => {
