@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Calculator</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #8e2de2, #4a00e0);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .calculator {
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.2);
+      width: 300px;
+    }
+
+    .calculator h2 {
+      text-align: center;
+      color: #4a00e0;
+      margin-bottom: 25px;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    button {
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: #4a00e0;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #6a00e0;
+    }
+
+    form {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="calculator">
+    <h2>Smart Calculator</h2>
+    <form id="calcForm">
+      <input type="number" name="num1" placeholder="Enter first number" required />
+      <input type="number" name="num2" placeholder="Enter second number" required />
+      
+      <div class="buttons">
+        <form action="/add" method="GET">
+          <input type="hidden" name="num1" />
+          <input type="hidden" name="num2" />
+          <button type="submit">➕ Add</button>
+        </form>
+
+        <form action="/sub" method="GET">
+          <input type="hidden" name="num1" />
+          <input type="hidden" name="num2" />
+          <button type="submit">➖ Sub</button>
+        </form>
+
+        <form action="/mul" method="POST">
+          <input type="hidden" name="num1" />
+          <input type="hidden" name="num2" />
+          <button type="submit">✖️ Mul</button>
+        </form>
+
+        <form action="/div" method="POST">
+          <input type="hidden" name="num1" />
+          <input type="hidden" name="num2" />
+          <button type="submit">➗ Div</button>
+        </form>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // This script copies values from the main input to each form dynamically
+    const mainForm = document.getElementById('calcForm');
+    const forms = mainForm.querySelectorAll('form');
+    const inputs = mainForm.querySelectorAll('input[type="number"]');
+
+    forms.forEach(form => {
+      form.addEventListener('submit', function (e) {
+        const [num1, num2] = inputs;
+        form.querySelector('input[name="num1"]').value = num1.value;
+        form.querySelector('input[name="num2"]').value = num2.value;
+      });
+    });
+  </script>
+
+</body>
+</html>
