@@ -1,15 +1,16 @@
-const express = require('express');
-const app = express();
+// serving a html file
+const http = require('http');
+const fs = require('fs');
 
-app.use(express.urlencoded())
+const server = http.createServer((req, res)=>{
+    if(req.url === '/home'){
+        fs.readFile('index.html', (err, data)=>{
+            res.writeHead(200, {"content-type":'text/html'});
+            res.end(data);
+        }); 
+    } else {
+        res.end('404 - page not found')
+    }
+});
 
-app.get("/", (req, res)=>{
-    // res.sendFile(__dirname, "/login.html")
-    // res.send({"Name": "Sanjay Gupta"});
-    // res.json({"Name":"Sneha"});
-    // res.status(200).send({"Sanjay":"Gupta"});
-})
-
-app.listen(3000, ()=>{
-    console.log("server started...")
-})
+server.listen(3000);

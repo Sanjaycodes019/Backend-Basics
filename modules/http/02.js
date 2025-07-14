@@ -1,24 +1,18 @@
-const express = require('express');
-const path = require('path');
-const app = express();
+// handling basic routes
 
-// Middleware to parse form data
-app.use(express.urlencoded({ extended: true }));
+const http = require('http');
 
-// Route: Serve login form
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "login.html"));
+const server = http.createServer((req, res)=>{
+    if(req.url === '/'){
+        res.end('Home Page');
+    } else if (req.url === '/about'){
+        res.end('About Us Page');
+    } else {
+        res.statusCode = 404;
+        res.end('404-page not found');
+    }
 });
 
-// Route: Handle form submission
-app.post("/sendData", (req, res) => {
-    console.log(req.body);
-});
-
-app.get('/style.css', (req, res)=>{
-    res.sendFile(__dirname, "/modules/http/public/style.css")
-})
-// Start server
-app.listen(3000, () => {
-    console.log("Server started on http://localhost:3000");
+server.listen(3000, ()=>{
+    console.log('server running... ');
 });
