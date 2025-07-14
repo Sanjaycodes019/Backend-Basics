@@ -1,1 +1,2 @@
 hello from node!
+ new text added
