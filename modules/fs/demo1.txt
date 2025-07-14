@@ -1,2 +1,0 @@
-hello from nodejs(async)
- new line added
