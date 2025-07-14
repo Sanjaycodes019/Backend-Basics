@@ -3,7 +3,7 @@
 // synchronous(blocking) - easy to read and understand
 // asynchronous(non-blocking) - better performance, real-world usage
 
-
+// writing to a file
 
 // importing the fs module
  const fs = require('fs');
@@ -14,7 +14,7 @@
  fs.writeFileSync('demo.txt', 'hello from node!');
 
  // async version
- fs.writeFile('demo1.txt', 'hello from nodejs(async', (err)=>{
+ fs.writeFile('demo1.txt', 'hello from nodejs(async)', (err)=>{
     if(!err) console.log('file written sucessully!');
  });
 
