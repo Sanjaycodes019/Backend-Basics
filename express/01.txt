@@ -1,0 +1,10 @@
+introduction:
+express.js is a minimal and flexible web framework 
+built on top of node.js
+simplifies routing, middleware handling, and building web servers
+
+Feature	            Express
+Routing	            Easier to manage GET, POST, PUT, DELETE routes
+Middleware support	Easily process requests (e.g., body parsing, logging)
+Static files	    Serve HTML, CSS, JS with one line
+Cleaner code	    Much more readable than plain http module
