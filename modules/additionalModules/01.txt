@@ -1,0 +1,10 @@
+Module      	Purpose
+fs	            File system
+http         	Server
+path	        File path utils
+url         	Parse URLs and queries
+events      	Handle custom events
+os	            System info
+crypto      	Hashing / encryption
+querystring 	Parse form data (GET/POST)
+util	        Utility functions (promisify etc)
