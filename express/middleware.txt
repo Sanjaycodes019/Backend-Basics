@@ -1,0 +1,12 @@
+Middleware
+function that runs during the request-response cycle
+-execute code
+-modify req, res
+-end the req-res cycle
+-call next(), to pass control
+
+types of Middleware
+-application level  app.use(), app.get()
+-router level       router.use()
+-built-in           express.static(), express.json()
+-third-party        morgan, cors, body-parser

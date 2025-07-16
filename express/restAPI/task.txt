@@ -1,0 +1,8 @@
+rest api - json
+
+get/user - list user
+get/user/1 - get the user with id o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF
+post/user - create new user
+patch/user/1 - edit user with id 1
+delete/user/1 - delete the user with id 1
+
