@@ -1,0 +1,20 @@
+express-session
+middleware in express.js
+stores user-specific data on server 
+
+-http is stateless(doesn't remember user between reQ)
+-session solve this by giving each other unique session id
+(usually stored in a cookie)
+-session data is stored in server, and only the id is sent to client
+
+why do we need it
+- keep user logged in across pages
+- to store temporary data like shopping cart item
+- track user activity securely
+
+how it works:
+-login->server creates a session-> assigns unique sessionID
+-session data is saved in memory, db or file
+-subsequent requests, the browser sends the cookie
+
+
