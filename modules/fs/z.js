@@ -1,30 +1,25 @@
-const fs = require('fs')
+const fs = require('fs');
 
-// write to a file
-fs.writeFile('today.txt', 'learning fs module', (err)=>{
-    if(err) throw err;
-    console.log('file created and data written')
+fs.writeFileSync('timestamp.txt', ''); // Create empty file
+let count = 0;
 
-    fs.appendFile('today.txt', ' and it is easy', (err)=>{
-        if(err) throw err
-        console.log('data appended')
+const timer = setInterval(() => {
+    count++;
+    const time = new Date().toString();
 
-        fs.readFile('today.txt', 'utf-8', (err, data)=>{
-            if(err) throw err;
-            console.log('file content', data);
+    // Append timestamp (synchronous for simplicity)
+    fs.appendFileSync('timestamp.txt', `log ${count}: ${time}\n`);
+    console.log(`Timestamp ${count} added`);
 
-            fs.renameSync('today.txt', 'journal.txt', (err)=>{
-                if(err) throw err;
-                console.log('file renamed to journal.txt')
+    if (count === 5) {
+        clearInterval(timer);
 
-                const stats = fs.statSync('journal.txt')
-                console.log(stats.size);
+        // Read file synchronously
+        const data = fs.readFileSync('timestamp.txt', 'utf-8');
+        console.log('\nFile content:\n', data);
 
-                fs.unlink('journal.txt', (err)=>{
-                    if(err) throw err;
-                    console.log('file deleted successfully')
-                })
-            })
-        })
-    })
-})
+        // Rename file
+        fs.renameSync('timestamp.txt', 'final_timestamp.txt');
+        console.log("File renamed to final_timestamp.txt");
+    }
+}, 5000);
