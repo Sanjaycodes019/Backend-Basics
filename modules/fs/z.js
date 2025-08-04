@@ -1,25 +1,19 @@
 const fs = require('fs');
 
-fs.writeFileSync('timestamp.txt', ''); // Create empty file
+fs.writeFileSync('log.txt', '');
+
 let count = 0;
 
 const timer = setInterval(() => {
     count++;
-    const time = new Date().toString();
+    const time = new Date().toLocaleTimeString();
 
-    // Append timestamp (synchronous for simplicity)
-    fs.appendFileSync('timestamp.txt', `log ${count}: ${time}\n`);
-    console.log(`Timestamp ${count} added`);
+    fs.appendFileSync('log.txt', `log${count}: ${time}\n`);
+    console.log(`log ${count} written`);
 
-    if (count === 5) {
+    if(count===3){
         clearInterval(timer);
-
-        // Read file synchronously
-        const data = fs.readFileSync('timestamp.txt', 'utf-8');
-        console.log('\nFile content:\n', data);
-
-        // Rename file
-        fs.renameSync('timestamp.txt', 'final_timestamp.txt');
-        console.log("File renamed to final_timestamp.txt");
+        const data = fs.readFileSync('log.txt', 'utf8');
+        console.log('\n final data: \n', data);
     }
-}, 5000);
+}, 2000);
