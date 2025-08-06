@@ -1,0 +1,89 @@
+// introduction to client server and request handling
+
+Client -> Sends requet (browser, mobile app)
+Server -> Processes request, sends response (Node.js backend)
+
+Request-Respone cycle
+1. client sends http request
+2. server processes request (using code, database etc)
+3. server sends http response backend
+
+Client(browser) -> http request -> server(node.js)
+server -> http respones -> Client
+
+Key Points
+-> server listens on port like 3000, 8080
+-> uses http methods
+    GET - retrieve data
+    Post - Send data
+    Put - update data
+    Delete - remove data
+
+Sample Code 
+
+ const http = require('http);
+
+ const server = http.createServer((req, res)=>{
+    res.writeHead(200, {'content-type':'text/plain'});
+    res.end('hello, this is my first node.js server');
+ });
+
+ serve.listen(3000, ()=>{
+    console.log('server running on the port http://localhost:3000')
+ });
+
+
+how it works? 
+http.createServer() -> creates server
+callback (req, res) -> handles incoming request & response
+server.listen(3000) -> server listens on port 3000
+
+
+trick 
+http.createServer((req, res)={...})
+res.writeHead(statuscode, headers)
+res.end('response)
+
+
+flow
+request -> server -> process -> response
+
+
+
+_________________________________________________________________________
+
+
+Request-Respose LifeCycle
+
+whenever we type url in browser
+1. DNS Lookup -> domain converts into ip
+2. Client sends http Request -> to server ip on port
+3. server processes -> using backend logic (node.js code, database, etc)
+4. server sends http response -> back to client
+
+
+Key http components
+
+-> Request Object (req)
+req.method-> GET/POST/PUT/Delete
+req.url-> URL path requested
+req.header-> MetaData(user-agent, content-type)
+
+-> Response Object (res)
+res.writeHead(statuscode, headers)
+res.end(data)
+
+
+
+// types of server
+
+Static Server -> only serves html, css, js (no processing)
+Dynamic Server -> Runs code, queries DB, returns dynamic content
+
+// trick and syntax
+http.createServer((req, res)=>{
+    res.writeHead(200, {'content-type:'text/plain'})
+    res.end('response here')
+}).listen(3000)
+
+
