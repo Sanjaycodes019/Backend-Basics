@@ -87,3 +87,131 @@ http.createServer((req, res)=>{
 }).listen(3000)
 
 
+Node introduction
+- javascript runtime environment built on chrome's v8 engine
+- run js outside the browser (on the server)
+
+Why is it popular? 
+- lightweight and fast (uses eventdriven, non-blocking IO)
+- uses javascript everywhere (frontend&backend)
+- huge ecosystem (npm modules)
+
+Advantages of NodeJS
+- Single programming language -> js on both client and server
+- Async and Non-Blocking -> handles multiple request efficiently
+- cross-platform -> works on windows, mac, linux
+- rich package manager (npm)-> thousand of ready-to-use modules
+- good for real-time apps (chat, streaming, etc)
+
+Disadvantages of NodeJS
+- CPU intensive tasks (like image processing) can block event Loop 
+- Callback hell in older code (fixed by promies and async/await)
+- Not suitable for Heavy Multithreaded applications
+
+Working of NodeJS
+- Single Threaded Event Loop -> Handles request asynchronously
+- Non - Blocking I/O -> Worker Thread (if need) -> Response sent
+
+Core Modules in NodeJS
+http -> create server, handle request and response
+fs -> file system operations
+path -> handles file path
+os -> os-related info
+events -> Event handling
+
+modules are the reusabe block of code that can be implemented into other files
+nodejs has 
+core modules - http, fs, path
+local modules - custom files
+thirdparty modules - installed via npm and express
+
+
+
+_code of http module_
+
+const http = require('http');
+
+http.createServer((req, res) => {
+    console.log('Request URL:', req.url);
+    console.log('Request Method:', req.method);
+
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('Request Received Successfully!');
+}).listen(3000, () => {
+    console.log('Server running on http://localhost:3000');
+});
+
+
+- always cleck req.method and req.url for routing
+- repose must end with res.end()
+
+
+Node Package Manager(NPM)
+- NPM is a default package manager for nodejs
+- install 3rd party packages(modules) from the npm registry
+- manages dependencies using package.json
+
+package.json
+- file that contains metadata of the project
+- project name, version, author 
+- scripts 
+- dependencies
+
+-> we create package.json by
+npm init -y   # -y creates with default values
+
+// installing a dev dependency
+   -> npm install nodemon 
+   npx nodemon server.js
+automatically restarts the server on filechange
+
+
+// Express js introduction
+-> ExpressJS is a minimal and flexible Node.js web application framework
+-> makes easy to handle
+- routing
+- middleware
+- http request and responses
+- static files
+
+# WHY express? 
+-> with core we manually check req.url , req.method
+-> express simplifies
+- cleaner syntax
+- middleware support
+- built-in router
+- large ecosystem
+
+# creating a basic express server
+
+const express = require('express')
+const app = expree();
+
+app.get('/', (req, res)=>{
+    res.send('welcome to express');
+});
+
+app.listen(3000, () =>{
+    console.log('server started and running at port 3000');
+})
+
+# express routing
+-> express used methods that match http verbs
+- app.get(path, callback)
+- app.post(path, callback)
+- app.put(path, callback)
+- app.delete(path, callback)
+
+
+# handling query and params
+// Query parameters: /search?name=John
+app.get('/search', (req, res) => {
+    res.send(`You searched for: ${req.query.name}`);
+});
+
+// URL parameters: /user/10
+app.get('/user/:id', (req, res) => {
+    res.send(`User ID: ${req.params.id}`);
+});
+
+
