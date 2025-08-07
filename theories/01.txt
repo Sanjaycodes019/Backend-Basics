@@ -214,4 +214,108 @@ app.get('/user/:id', (req, res) => {
     res.send(`User ID: ${req.params.id}`);
 });
 
+___________________________________________________________________________
+
+Middleware:
+
+function that executes during the request-response cycle
+it can :
+- modify the req, res objects
+- end the response cycle
+- pass control to next middleware
+
+Syntax of middleware
+
+app.use((req, res, next)=>{
+    do something
+    next();
+})
+
+Types of Middleware
+
+Application-level -> app.use(...), runs for all request
+Route-level -> used for specific routes
+Built-in -> express.json(), express.static()
+ThirdParty -> morgan, cors, body-parser, etc
+
+
+const express = require('express');
+const app = express();
+
+// Custom middleware
+app.use((req, res, next) => {
+    console.log(`${req.method} ${req.url}`);
+    next();
+});
+
+// Route
+app.get('/', (req, res) => {
+    res.send('Home Page');
+});
+
+app.listen(3000, () => {
+    console.log('Server running on http://localhost:3000');
+});
+
+
+
+_____Built-in middleware______________
+
+app.use(express.json())
+
+Tricks to remember middleware
+- always end middleware with next()
+- it executes in the order it's written
+- use express.json() brefore reading req.body
+
+# Request Component Recap
+| Component| Accessed via          | Example URL                                 |
+| ---------| ----------------------| ------------------------------------------- |
+| Params   | `req.params`          | `/user/123` → `req.params.id = 123`         |
+| Query    | `req.query`           | `/search?name=abc` → `req.query.name = abc` |
+| Body     | `req.body`            | `{ name: "John" }` in POST request          |
+| Headers  | `req.headers`         | Custom or default headers                   |
+| Method   | `req.method`          | `GET`, `POST`, `PUT`, `DELETE`              |
+| URL/Path | `req.url`, `req.path` | `/users/abc`                                |
+
+
+# Using url params
+# URL: /user/101
+app.get('/user/:id', (req, res)=>{
+    const userID = req.params.id;
+    res.send(`user id: ${userID}`);
+});
+
+
+
+# Using query strings
+#  URL: /search?q=nodejs
+app.get('/search', (req, res)={
+    const keyword = req.query.q;
+    res.send(`search result for: ${keyword});
+});
+
+
+# Using request body (POST)
+-> requires middleware
+
+app.use(express.json());
+
+app.post('/login', (req, res)=>{
+    const{username, password} = req.body;
+    res.send(`recieved login for ${username}`);
+});
+
+
+# final trick 
+part      tip
+params -> always use : in route path
+query  -> use req.query.Key
+body   -> use express.json() first
+
+
+
+# What is REST API? 
+REST = Representational state transfer
+A REST API uses HTTP method to perform operations on resources(data)
 
