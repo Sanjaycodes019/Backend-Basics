@@ -1,24 +1,43 @@
-const express = require('express');
-const app = express();
+// dynamic routing with multiple params
+// url = /user/:uid/order/:oid
+// http://localhost:3000/user/101/order/5001
 
-app.use(express.json());
+// const express = require('express');
+// const app = express();
+// const PORT = 3000;
 
-// Params
-app.get('/user/:id', (req, res) => {
-    res.send(`User ID is ${req.params.id}`);
-});
+// app.get('/user/:uid/order/:oid', (req, res) => {
+//     const userId = req.params.uid;
+//     const orderId = req.params.oid;
 
-// Query
-app.get('/search', (req, res) => {
-    res.send(`Search for ${req.query.q}`);
-});
+//     res.send(`User ID: ${userId}, Order ID: ${orderId}`);
+// });
 
-// Body
-app.post('/register', (req, res) => {
-    const { name, email } = req.body;
-    res.send(`User ${name} with email ${email} registered!`);
-});
+// app.listen(PORT, () => {
+//     console.log(`Server running at http://localhost:${PORT}`);
+// });
 
-app.listen(3000, () => {
-    console.log('Server running on http://localhost:3000');
-});
+
+
+// serving static files using 
+
+const express = require('express')
+const path = require('path')
+const app = express()
+const port = 3000
+
+app.get('/home', (req, res)=>{
+    res.sendFile(path.join(__dirname, 'home.html'))
+})
+
+app.get('/about', (req, res)=>{
+    res.sendFile(path.join(__dirname, 'about.html'))
+})
+
+app.get('/contact', (req, res)=>{
+    res.sendFile(path.join(__dirname, 'contact.html'))
+})
+
+app.listen(port, ()=>{
+    console.log('server running on the port 3000')
+})
