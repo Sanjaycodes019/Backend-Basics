@@ -319,3 +319,18 @@ body   -> use express.json() first
 REST = Representational state transfer
 A REST API uses HTTP method to perform operations on resources(data)
 
+
+#What is Pagination?
+-> breaking large data into smaller chunks(pages) and sending them one 
+page at a time instead of sending whole dataset
+
+-> instead of sending 1000 in one API call, send 10 per page
+   -/users?page=1&limit=10 -> user 1-10
+-> makes APIs faster, lighter and easier to consume
+
+
+Client sends query params: page & limit
+Server calculates
+startIndex = (page-1)*limit
+endIndex = page*limit
+
