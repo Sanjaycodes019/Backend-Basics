@@ -32,10 +32,10 @@ app.get("/get-products", (req, res)=>{
   let page = parseInt(req.query.page) || 1;
   let limit = parseInt(req.query.limit) || 10;
 
-  let startIndex = (page - 1) * limit;
-  let endIndex = page*limit;
+  let i = (page - 1) * limit;
+  let n = page*limit;
 
-  let result = projects.slice(startIndex, endIndex);
+  let result = projects.slice(i, n);
 
   res.json({
     page,

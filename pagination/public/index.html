@@ -13,12 +13,24 @@
       width: 200px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-    .buttons { margin-top: 20px; }
-    button { padding: 8px 12px; margin: 5px; }
+    .controls { margin: 20px 0; }
+    select, button { padding: 8px 12px; margin: 5px; }
   </style>
 </head>
 <body>
   <h2>Projects</h2>
+
+  <!-- Dropdown to choose limit -->
+  <div class="controls">
+    <label for="limitSelect">Items per page: </label>
+    <select id="limitSelect" onchange="changeLimit()">
+      <option value="5">5</option>
+      <option value="10" selected>10</option>
+      <option value="20">20</option>
+      <option value="50">50</option>
+    </select>
+  </div>
+
   <div id="projects"></div>
   
   <div class="buttons">
@@ -28,7 +40,7 @@
 
   <script>
     let currentPage = 1;
-    const limit = 10;
+    let limit = 10; // default
 
     async function fetchProjects(page = 1) {
       const res = await fetch(`/get-products?page=${page}&limit=${limit}`);
@@ -36,7 +48,7 @@
 
       const container = document.getElementById("projects");
       container.innerHTML = "";
-            
+
       data.data.forEach(p => {
         const card = document.createElement("div");
         card.className = "card";
@@ -57,7 +69,14 @@
       }
     }
 
-    // Load first page initially
+    function changeLimit() {
+      const select = document.getElementById("limitSelect");
+      limit = parseInt(select.value); // update limit
+      currentPage = 1; // reset to first page when limit changes
+      fetchProjects(currentPage);
+    }
+
+    // Initial load
     fetchProjects(currentPage);
   </script>
 </body>
