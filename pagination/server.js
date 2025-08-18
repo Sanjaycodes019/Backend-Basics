@@ -2,20 +2,17 @@ const express = require("express");
 const path = require("path");
 const app = express();
 
-// Serve static files from "public" folder
 app.use(express.static(path.join(__dirname, "public")));
 
-// Dummy 100 projects
 const projects = Array.from({ length: 100 }, (_, i) => ({
   id: i + 1,
   name: `Project ${i + 1}`,
   description: `This is the description of project ${i + 1}`
 }));
 
-// Route for paginated data
 app.get("/get-products", (req, res) => {
-  let page = parseInt(req.query.page) || 1;   // default page = 1
-  let limit = parseInt(req.query.limit) || 10; // default limit = 10
+  let page = parseInt(req.query.page) || 1;  
+  let limit = parseInt(req.query.limit) || 10; 
 
   let startIndex = (page - 1) * limit;
   let endIndex = page * limit;
