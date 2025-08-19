@@ -1,0 +1,120 @@
+JS IN BROWSER
+- runs inside browser (chrome, firefox)
+- mainly used for frontend, manipulating html, css, dom, events
+- can't directly acess files, databases or server resources
+
+JS IN NODEJS
+- runs outside the browser
+- powered by v8 engine
+- mainly used for backend -> server creation, file handling, databases, APIs
+- doesn't have DOM APIs
+
+UI, DOM ! server, DB, APIs, filesystem
+
+NODEJS SINGLE THREADED
+-> runs js on a single thread, main call stack
+-> doesn't create new threads for each request like java or python
+
+NODE JS NON BLOCKING
+-> can handle many requests at a time being single-THREADED
+-> because of eventloop, callback queue
+-> task like (reading file, db query, api request)
+   - doesn't wait for them to finish
+   - hands them off to the system
+   - keeps serving other requests
+-> once I/O is done, comes back to the event loop
+
+NODE JS HAS :
+Main Thread -> runs your js code
+Event Loop -> keeps track of tasks, executes them when ready
+Libuv + OS APIs -> handles aysnc things outside the main thread
+
+Diagram:
+Main Thread (JS Code Execution)
+        |
+        v
+   Event Loop <---- async task completed (like DB/file)
+        |
+        v
+   Callback Queue
+        |
+        v
+   Executes in Main Thread
+
+
+NODEJS runs on a single thread -> js execution doesn't automatically spread across multiple 
+cpu cores.
+
+But NODJS CAN USE MULTIPLE CORE USING
+-> Cluster Module
+-> Worker_Threads(since node 10.5+)
+
+No, Node.js alone (single process, single thread) doesn’t use multiple cores.
+Yes, Node.js can use multiple cores if you explicitly use cluster or worker_threads.
+
+
+
+Sync Code:
+-> runs line by line
+-> each step should finish before the next one starts
+-> if sth takes time whole program will wait
+
+const fs = require("fs");
+fs.mkdirSync("testSync"); 
+console.log("Folder created (Sync)");
+console.log("This will run only after folder is created");
+
+
+Async Code:
+-> doesn't block the code
+-> registers a callback and continues execution
+-> when the work is done, the callback is called
+
+const fs = require("fs");
+fs.mkdir("testAsync", (err) => {
+  if (err) throw err;
+  console.log("Folder created (Async)");
+});
+console.log("This line runs immediately (non-blocking)");
+
+
+Node.js loves async because it’s non-blocking → more requests handled smoothly.
+
+
+MIDDLEWARE
+-> Function that runs between the request and response cycle
+-> it can read, modify, log, block or forward request
+-> it must call next() to pass control to next middleware
+   otherwise it stops THREADED
+
+Common Example:
+function middlewareName(req, res, next) {
+    // Do something (log, modify req, check auth, etc.)
+    console.log("Middleware triggered");
+    // Pass control to next middleware
+    next();
+}
+
+const express = require("express");
+const app = express();
+app.use(middlewareName);  // Apply middleware globally
+
+Session
+-> HTTP is a stateless protocol, every request is independent
+-> SESSION is way to persist user data between multiple requests
+-> helps to recognize multiple request from same user
+   to give continuity
+   
+WORKING
+- user logs in or starts interaction
+- server creates session, stores session data on the server, assigns a unique
+  session id 
+- server sends the session id to the client in a cookie (most common)
+- client browser sends this cookie with every subsequent request
+- session persist untill logout or expiration
+
+USE
+- to maintain user identity
+- remember user preference, shopping carts and authentication state
+- provide personalized user experience
+
