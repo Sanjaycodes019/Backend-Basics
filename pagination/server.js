@@ -4,7 +4,6 @@ const { start } = require("repl");
 const app = express();
 
 app.use(express.static(path.join(__dirname, "public")));
-
 const projects = Array.from({ length: 100 }, (_, i) => ({
   id: i + 1,
   name: `Project ${i + 1}`,
@@ -27,7 +26,6 @@ const projects = Array.from({ length: 100 }, (_, i) => ({
 //     data: result
 //   });
 // });
-
 app.get("/get-products", (req, res)=>{
   let page = parseInt(req.query.page) || 1;
   let limit = parseInt(req.query.limit) || 10;
