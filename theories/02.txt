@@ -116,5 +116,4 @@ WORKING
 USE
 - to maintain user identity
 - remember user preference, shopping carts and authentication state
-- provide personalized user experience
-
+- provide personalized ux
