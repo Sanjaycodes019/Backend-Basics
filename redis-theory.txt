@@ -1,0 +1,53 @@
+REDIS CACHING - QUICK REVISION
+===============================
+
+What is Redis?
+--------------
+• In-memory key-value store
+• Extremely fast (sub-millisecond)
+• Used for caching, sessions, queues
+
+Setup
+-----
+• npm install ioredis
+• redis = new Redis({ host, port })
+
+Basic Operations
+----------------
+await redis.set('key', 'value')
+await redis.get('key')
+await redis.setex('key', 3600, 'value')  // With TTL
+await redis.del('key')
+await redis.expire('key', 300)
+
+Caching Pattern
+---------------
+async function getData(id) {
+    const cached = await redis.get(`data:${id}`)
+    if (cached) return JSON.parse(cached)
+    
+    const data = await fetchFromDB(id)
+    await redis.setex(`data:${id}`, 3600, JSON.stringify(data))
+    return data
+}
+
+Cache Strategies
+----------------
+• Cache Aside: Check cache → DB → Update cache
+• Write Through: Update DB + cache together
+• TTL: Time To Live (expiration)
+
+Common Uses
+-----------
+• Session storage
+• API response caching
+• Rate limiting counters
+• Real-time leaderboards
+
+Checklist
+---------
+□ Set appropriate TTL
+□ Invalidate on updates
+□ Handle cache misses
+□ Use for expensive queries
+□ Consider Redis for sessions

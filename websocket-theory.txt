@@ -1,0 +1,64 @@
+WEBSOCKETS - QUICK REVISION
+===========================
+
+What are WebSockets?
+--------------------
+• Bi-directional, persistent connection
+• Real-time communication
+• Better than polling for live updates
+
+Socket.IO
+---------
+• npm install socket.io
+• Works with express http server
+
+Server Setup
+------------
+const io = new Server(httpServer)
+io.on('connection', (socket) => {
+    console.log('User connected:', socket.id)
+    
+    socket.on('message', (data) => {
+        io.emit('message', data)  // Broadcast
+    })
+    
+    socket.on('disconnect', () => {
+        console.log('User disconnected')
+    })
+})
+
+Events
+------
+socket.emit('event', data)        // To specific client
+socket.broadcast.emit('event')    // To all except sender
+io.emit('event', data)            // To all clients
+socket.on('event', callback)      // Listen to events
+
+Rooms
+-----
+socket.join('room-name')          // Join room
+socket.leave('room-name')         // Leave room
+io.to('room-name').emit('msg')    // Send to room
+
+Client (Browser)
+----------------
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io()
+    socket.emit('message', 'Hello')
+    socket.on('message', (msg) => console.log(msg))
+</script>
+
+Use Cases
+---------
+• Chat applications
+• Live notifications
+• Real-time dashboards
+• Multiplayer games
+
+Checklist
+---------
+□ Handle connect/disconnect
+□ Implement event handlers
+□ Use rooms for grouping
+□ Handle errors gracefully

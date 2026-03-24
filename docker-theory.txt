@@ -1,0 +1,62 @@
+DOCKER - QUICK REVISION
+========================
+
+What is Docker?
+---------------
+• Container platform
+• Packages app + dependencies
+• Runs consistently anywhere
+
+Key Files
+---------
+• Dockerfile - Build instructions
+• docker-compose.yml - Multi-container
+• .dockerignore - Exclude files
+
+Dockerfile Basics
+-----------------
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production
+COPY . .
+EXPOSE 3000
+CMD ["node", "server.js"]
+
+Docker Compose
+--------------
+version: '3.8'
+services:
+  app:
+    build: .
+    ports: ["3000:3000"]
+    depends_on: [mongo, redis]
+  mongo:
+    image: mongo:6
+    volumes: [mongo-data:/data/db]
+  redis:
+    image: redis:7-alpine
+
+Commands
+--------
+docker-compose up -d      // Start
+docker-compose down       // Stop
+docker-compose logs       // View logs
+docker-compose ps         // List running
+
+Multi-Stage Build
+-----------------
+FROM node:18-alpine AS builder
+... build steps ...
+
+FROM node:18-alpine AS production
+COPY --from=builder /app/dist ./
+CMD ["node", "server.js"]
+
+Checklist
+---------
+□ Use .dockerignore
+□ Multi-stage for smaller images
+□ Don't run as root
+□ Pin image versions
+□ Use docker-compose for local dev

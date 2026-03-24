@@ -1,0 +1,72 @@
+TESTING - QUICK REVISION
+========================
+
+Jest Setup
+----------
+• Install: npm install --save-dev jest supertest
+• Script: "test": "jest"
+• Run: npm test
+
+Test Structure
+--------------
+describe('Feature', () => {
+    beforeAll(() => {})    // Once before all
+    beforeEach(() => {})   // Before each test
+    
+    test('should do X', () => {
+        // Arrange, Act, Assert
+    })
+    
+    afterEach(() => {})    // After each test
+    afterAll(() => {})     // Once after all
+})
+
+Common Matchers
+---------------
+expect(value).toBe(expected)        // Strict equality
+expect(value).toEqual(expected)      // Deep equality
+expect(value).toBeTruthy()
+expect(value).toBeDefined()
+expect(array).toContain(item)
+expect(fn).toThrow()
+
+Async Testing
+-------------
+test('async', async () => {
+    const data = await fetchData()
+    expect(data).toBeDefined()
+})
+
+// Or
+test('async', () => {
+    return expect(fetchData()).resolves.toBe('data')
+})
+
+API Testing (Supertest)
+-----------------------
+const request = require('supertest')
+const app = require('./app')
+
+test('GET /users', async () => {
+    const res = await request(app).get('/users')
+    expect(res.status).toBe(200)
+    expect(res.body).toEqual([])
+})
+
+Mocking
+-------
+jest.mock('axios')
+axios.get.mockResolvedValue({ data: mockData })
+expect(axios.get).toHaveBeenCalledWith(url)
+
+Coverage
+--------
+npm test -- --coverage
+
+Checklist
+---------
+□ Test happy paths
+□ Test error cases
+□ Test edge cases (empty, null)
+□ Mock external dependencies
+□ Clean up after tests

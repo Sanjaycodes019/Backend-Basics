@@ -1,0 +1,52 @@
+AUTHENTICATION & SECURITY - QUICK REVISION
+============================================
+
+JWT (JSON Web Tokens)
+---------------------
+• Header.Payload.Signature structure
+• Use for stateless authentication
+• Store secret in env variables
+• Set expiration (don't use forever tokens)
+
+Generate: jwt.sign(payload, secret, { expiresIn: '1h' })
+Verify:  jwt.verify(token, secret)
+
+bcrypt (Password Hashing)
+-------------------------
+• Never store plain text passwords
+• Salt rounds: 10-12 for production
+• Hash: await bcrypt.hash(password, 10)
+• Compare: await bcrypt.compare(password, hash)
+
+Authentication Flow
+-------------------
+1. Register: hash password → save user
+2. Login: find user → compare password → generate JWT
+3. Protected routes: verify JWT → attach user → continue
+
+CORS
+----
+• Blocks cross-origin requests by default
+• Configure allowed origins, methods, headers
+• Use cors middleware: app.use(cors({ origin: 'url' }))
+
+Helmet
+------
+• Sets security headers automatically
+• Protects against XSS, clickjacking
+• app.use(helmet())
+
+Security Checklist
+------------------
+□ Store JWT_SECRET in .env
+□ Use HTTPS in production
+□ Hash passwords with bcrypt
+□ Set JWT expiration
+□ Use Helmet middleware
+□ Configure CORS properly
+□ Rate limit auth endpoints
+□ Use httpOnly cookies for tokens
+
+Required Packages
+-----------------
+npm install jsonwebtoken bcrypt cors helmet

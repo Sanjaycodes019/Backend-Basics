@@ -1,0 +1,59 @@
+MVC ARCHITECTURE - QUICK REVISION
+==================================
+
+What is MVC?
+------------
+M - Model (data layer)
+V - View (presentation/API response)
+C - Controller (request handler)
+
+Folder Structure
+----------------
+config/         → Database, env
+controllers/    → Handle requests
+models/         → Database schemas
+routes/         → URL routing
+services/       → Business logic
+middleware/     → Auth, validation
+utils/          → Helpers
+
+Controller
+----------
+exports.getUsers = async (req, res) => {
+    const users = await userService.getAll()
+    res.json({ status: 'success', data: users })
+}
+
+Service
+-------
+class UserService {
+    async getAll() {
+        return await User.find()
+    }
+}
+
+Route
+-----
+router.get('/', userController.getUsers)
+router.post('/', validate(schema), userController.create)
+
+Middleware Flow
+----------------
+Request → Middleware → Controller → Service → Model → DB
+              ↓
+Response ← Controller ← View (JSON)
+
+Benefits
+--------
+• Separation of concerns
+• Easier testing
+• Maintainable
+• Scalable
+
+Checklist
+---------
+□ Controllers handle HTTP only
+□ Services contain business logic
+□ Models handle data
+□ Routes are thin
+□ Use middleware for common tasks

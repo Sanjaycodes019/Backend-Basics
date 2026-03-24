@@ -1,0 +1,77 @@
+ERROR HANDLING & LOGGING - QUICK REVISION
+=========================================
+
+Error Handling
+--------------
+• Sync errors: caught automatically by Express
+• Async errors: use try-catch or asyncHandler
+• Always call next(err) to pass to error handler
+
+Custom Error Class
+------------------
+class AppError extends Error {
+    constructor(message, statusCode) {
+        super(message)
+        this.statusCode = statusCode
+        this.status = `${statusCode}`.startsWith('4') ? 'fail' : 'error'
+        this.isOperational = true
+    }
+}
+
+Central Error Handler
+---------------------
+app.use((err, req, res, next) => {
+    err.statusCode = err.statusCode || 500
+    err.status = err.status || 'error'
+    
+    logger.error(err.message)
+    
+    res.status(err.statusCode).json({
+        status: err.status,
+        message: err.message
+    })
+})
+
+Winston Logger
+--------------
+• npm install winston
+• Log levels: error, warn, info, debug
+• Transports: console, file
+• Rotate logs daily
+
+Basic Setup:
+winston.createLogger({
+    level: 'info',
+    format: winston.format.simple(),
+    transports: [
+        new winston.transports.Console(),
+        new winston.transports.File({ filename: 'error.log' })
+    ]
+})
+
+Morgan HTTP Logger
+------------------
+• npm install morgan
+• app.use(morgan('dev'))  // Short colored
+• app.use(morgan('combined'))  // Apache style
+
+Unhandled Errors
+----------------
+process.on('unhandledRejection', err => {
+    logger.error(err)
+    process.exit(1)
+})
+
+process.on('uncaughtException', err => {
+    logger.error(err)
+    process.exit(1)
+})
+
+Checklist
+---------
+□ Use custom error classes
+□ Central error handler middleware
+□ Log all errors
+□ Don't leak stack traces in production
+□ Handle unhandled rejections
+□ Handle uncaught exceptions

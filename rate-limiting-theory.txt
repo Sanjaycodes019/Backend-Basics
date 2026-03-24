@@ -1,0 +1,56 @@
+RATE LIMITING - QUICK REVISION
+==============================
+
+Why Rate Limit?
+---------------
+• Prevent brute force attacks
+• Control API abuse
+• Manage server load
+
+express-rate-limit
+------------------
+• npm install express-rate-limit
+
+Basic Setup
+-----------
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000,  // 15 min
+    max: 100,                   // 100 requests
+    message: 'Too many requests'
+})
+app.use(limiter)
+
+Specific Routes
+---------------
+const authLimiter = rateLimit({
+    windowMs: 60 * 60 * 1000,  // 1 hour
+    max: 5                      // 5 attempts
+})
+app.use('/auth/', authLimiter)
+
+Security Packages
+-----------------
+• helmet - Security headers
+• cors - Cross-origin control
+• express-mongo-sanitize - NoSQL injection
+• xss-clean - XSS prevention
+• hpp - Parameter pollution
+
+Helmet Setup
+------------
+app.use(helmet())
+
+CORS Setup
+----------
+app.use(cors({
+    origin: ['http://localhost:3000']
+}))
+
+Checklist
+---------
+□ Rate limit all routes
+□ Stricter limits on auth
+□ Use helmet for headers
+□ Configure CORS properly
+□ Sanitize MongoDB inputs
+□ Prevent XSS attacks
