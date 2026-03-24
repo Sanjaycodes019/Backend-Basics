@@ -1,0 +1,18 @@
+# Notes for Blog-API Folder
+
+## Overview
+Complete Blog API implementation demonstrating modular Express architecture.
+
+## Structure
+- **app.js** - Main application file
+- **package.json** - Dependencies
+- **routes/** - Modular route handlers
+
+## Routes
+- `/posts` - Post management
+- `/comments` - Comment management
+
+## Features
+- RESTful API design
+- Resource nesting (posts with comments)
+- Modular code organization

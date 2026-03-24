@@ -1,0 +1,24 @@
+# Notes for Express restAPI Subfolder
+
+## Overview
+REST API implementation examples following RESTful principles.
+
+## Files
+- **01.js** - Basic REST API with CRUD operations
+- **index.js** - REST API entry point
+- **task.txt** - REST API exercises and tasks
+
+## REST Principles Demonstrated
+- Resource-based URLs
+- HTTP method mapping (GET, POST, PUT, DELETE)
+- JSON response format
+- Proper status codes
+
+## Endpoints Example
+```
+GET    /users      - List all users
+GET    /users/:id  - Get specific user
+POST   /users      - Create new user
+PUT    /users/:id  - Update user
+DELETE /users/:id  - Delete user
+```

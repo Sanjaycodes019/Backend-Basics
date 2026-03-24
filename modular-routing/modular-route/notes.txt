@@ -1,0 +1,20 @@
+# Notes for Modular-Route Subfolder
+
+## Overview
+Basic modular routing pattern demonstration.
+
+## Files
+- **01.js** - Simple modular router setup
+- **routes/users.js** - User route handlers with CRUD operations
+
+## Implementation
+Demonstrates the basic pattern of separating routes into dedicated files.
+
+## Routes
+```
+GET    /users      - List users
+GET    /users/:id  - Get specific user
+POST   /users      - Create user
+PUT    /users/:id  - Update user
+DELETE /users/:id  - Delete user
+```

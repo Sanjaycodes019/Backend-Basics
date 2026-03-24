@@ -1,0 +1,66 @@
+# Notes for Express-Static-Demo Folder
+
+## Overview
+This folder demonstrates serving static files (HTML, CSS, JS) using Express.js.
+
+## Files
+
+### Server
+- **app.js** - Express server configured to serve static files
+  - Uses express.static middleware
+  - Serves files from 'public' directory
+  - Runs on port 3000
+
+### Public Folder
+Contains static assets served to clients:
+- **index.html** - Main HTML page
+- **script.js** - Client-side JavaScript
+- **style.css** - Styling rules
+
+## How It Works
+
+### Static Middleware
+```javascript
+app.use(express.static(path.join(__dirname, 'public')));
+```
+
+This line:
+1. Serves all files in the 'public' folder
+2. Makes them accessible via their filenames
+3. index.html is served by default at root '/'
+
+## Access Patterns
+- `/` -> serves public/index.html
+- `/style.css` -> serves public/style.css
+- `/script.js` -> serves public/script.js
+
+## How to Run
+```bash
+# Install dependencies
+npm install
+
+# Start server
+node app.js
+
+# Open http://localhost:3000
+```
+
+## Common Use Cases
+- Serving frontend applications
+- Hosting images and assets
+- Delivering CSS and JavaScript files
+- Creating simple static websites
+
+## Dependencies
+```json
+{
+  "dependencies": {
+    "express": "^4.x"
+  }
+}
+```
+
+## Best Practices
+1. Place all static assets in a dedicated folder (e.g., 'public', 'static')
+2. Use path.join() for cross-platform compatibility
+3. Consider using __dirname for absolute paths

@@ -1,0 +1,210 @@
+MONGODB + MONGOOSE - QUICK REVISION NOTES
+========================================
+
+WHAT IS MONGODB?
+----------------
+• NoSQL document database
+• Stores data as JSON-like documents (BSON)
+• No fixed schema (flexible)
+• Good for unstructured data
+
+TERMINOLOGY
+-----------
+Database   → Container (like SQL database)
+Collection → Group of documents (like table)
+Document   → Single record (like row), BSON format
+Field      → Key-value pair (like column)
+
+MONGOOSE
+--------
+• ODM (Object Data Modeling) for MongoDB
+• Adds schema to flexible MongoDB
+• Validation, type casting, middleware
+• npm install mongoose
+
+CONNECTION
+----------
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost:27017/dbname')
+    .then(() => console.log('Connected'))
+    .catch(err => console.error(err));
+
+SCHEMA DEFINITION
+-----------------
+const userSchema = new mongoose.Schema({
+    name: String,
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    age: {
+        type: Number,
+        min: 0,
+        max: 150
+    },
+    role: {
+        type: String,
+        enum: ['user', 'admin'],
+        default: 'user'
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+const User = mongoose.model('User', userSchema);
+
+CREATE
+------
+// Method 1
+const user = new User({ name: 'John', email: 'john@email.com' });
+await user.save();
+
+// Method 2 (shorter)
+const user = await User.create({ name: 'John', email: 'john@email.com' });
+
+// Insert many
+await User.insertMany([{...}, {...}]);
+
+READ
+----
+await User.find()                    → All users
+await User.find({ age: { $gte: 18 } }) → Filtered
+await User.findOne({ email: '...' })   → One user
+await User.findById('123')            → By ID
+await User.find().select('name email') → Specific fields
+await User.find().limit(10).skip(20)   → Pagination
+await User.find().sort({ createdAt: -1 }) → Sort (desc)
+
+UPDATE
+------
+await User.updateOne(
+    { email: 'john@email.com' },
+    { $set: { age: 26 } }
+);
+
+await User.updateMany(
+    { role: 'user' },
+    { $set: { role: 'member' } }
+);
+
+// Find and update (returns doc)
+const user = await User.findByIdAndUpdate(
+    '123',
+    { age: 26 },
+    { new: true }  // Return updated
+);
+
+DELETE
+------
+await User.deleteOne({ email: '...' });
+await User.deleteMany({ role: 'guest' });
+await User.findByIdAndDelete('123');
+
+QUERY OPERATORS
+---------------
+$eq    → Equal              { age: { $eq: 25 } }
+$ne    → Not equal          { age: { $ne: 25 } }
+$gt    → Greater than       { age: { $gt: 18 } }
+$gte   → Greater or equal   { age: { $gte: 18 } }
+$lt    → Less than          { age: { $lt: 65 } }
+$lte   → Less or equal      { age: { $lte: 65 } }
+$in    → In array           { role: { $in: ['admin', 'mod'] } }
+$nin   → Not in array       { role: { $nin: ['banned'] } }
+
+LOGICAL OPERATORS
+-----------------
+$or  → { $or: [{ age: 18 }, { role: 'admin' }] }
+$and → { $and: [{ age: 18 }, { role: 'user' }] }
+
+REGEX SEARCH
+------------
+// Name starts with J (case insensitive)
+{ name: { $regex: /^J/, $options: 'i' } }
+
+VALIDATORS
+----------
+required: true                    → Must have value
+unique: true                      → No duplicates
+min: 0, max: 150                  → Number range
+minlength: 2, maxlength: 50       → String length
+match: /regex/                    → Pattern match
+enum: ['a', 'b']                  → Allowed values
+default: value                    → Default value
+
+RELATIONSHIPS (REFERENCES)
+--------------------------
+const postSchema = new mongoose.Schema({
+    title: String,
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'    // Reference to User collection
+    }
+});
+
+// Create
+await Post.create({ title: 'Post', author: userId });
+
+// Populate (join)
+const posts = await Post.find().populate('author', 'name email');
+// Returns posts with author info instead of just ID
+
+MIDDLEWARE (HOOKS)
+------------------
+// Pre-save hook
+userSchema.pre('save', function(next) {
+    // Runs before saving
+    next();
+});
+
+// Post-save hook
+userSchema.post('save', function(doc) {
+    console.log('Saved:', doc.name);
+});
+
+PAGINATION PATTERN
+------------------
+async function getUsers(page = 1, limit = 10) {
+    const skip = (page - 1) * limit;
+    
+    const users = await User.find()
+        .skip(skip)
+        .limit(limit)
+        .sort({ createdAt: -1 });
+    
+    const total = await User.countDocuments();
+    
+    return { users, total, page, pages: Math.ceil(total / limit) };
+}
+
+SEARCH PATTERN
+--------------
+async function search(query) {
+    return await User.find({
+        $or: [
+            { name: { $regex: query, $options: 'i' } },
+            { email: { $regex: query, $options: 'i' } }
+        ]
+    });
+}
+
+QUICK CHECKLIST
+---------------
+□ MongoDB = document database
+□ Collection ≈ Table, Document ≈ Row
+□ Mongoose adds schema
+□ mongoose.connect() for connection
+□ new Schema({}) to define structure
+□ mongoose.model() creates model
+□ .create() or .save() to insert
+□ .find(), .findOne(), .findById() to read
+□ .updateOne(), findByIdAndUpdate() to update
+□ .deleteOne(), findByIdAndDelete() to delete
+□ $gt, $lt, $gte, $lte for comparison
+□ $or, $and for logical
+□ .populate() for joining references
+□ required, min, max, match for validation
+□ pre/post hooks for middleware

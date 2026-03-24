@@ -1,0 +1,74 @@
+# Notes for Pagination Folder
+
+## Overview
+This folder demonstrates server-side pagination implementation in Express.js.
+
+## Files
+
+### Server
+- **server.js** - Express server with pagination logic
+  - Generates 100 sample projects
+  - Implements query-based pagination
+  - Returns paginated JSON response
+
+### Frontend
+- **public/index.html** - Interactive UI for testing pagination
+  - Next/Previous buttons
+  - Page number input
+  - Limit selector
+  - Results display
+
+## How It Works
+
+### Query Parameters
+- `page` - Current page number (default: 1)
+- `limit` - Items per page (default: 10)
+
+### Pagination Logic
+```javascript
+startIndex = (page - 1) * limit
+endIndex = page * limit
+result = data.slice(startIndex, endIndex)
+```
+
+### API Response Format
+```json
+{
+  "page": 1,
+  "limit": 10,
+  "total": 100,
+  "data": [...]
+}
+```
+
+## Sample API Usage
+```
+GET /get-products?page=1&limit=10
+GET /get-products?page=2&limit=20
+```
+
+## How to Run
+```bash
+# Install dependencies
+npm install
+
+# Start server
+node server.js
+
+# Open http://localhost:3000 in browser
+```
+
+## Key Features
+- Server-side pagination calculation
+- Static file serving for UI
+- RESTful API design
+- Query parameter parsing
+
+## Dependencies
+```json
+{
+  "dependencies": {
+    "express": "^4.x"
+  }
+}
+```

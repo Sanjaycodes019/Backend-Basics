@@ -1,0 +1,49 @@
+# Notes for AdditionalModules Subfolder
+
+## Overview
+Examples of additional Node.js utility modules beyond the core set.
+
+## Files
+- **crypto.js** - Cryptographic operations (hashing, encryption)
+- **events.js** - EventEmitter pattern implementation
+- **os.js** - Operating system information and system details
+- **querystring.js** - Query string parsing and formatting
+- **url.js** - URL parsing, formatting, and manipulation
+- **util.js** - Utility functions (promisify, inspect, etc.)
+- **01.txt** - Theory notes for these modules
+
+## Module Purposes
+
+### crypto
+- Password hashing
+- Data encryption/decryption
+- Creating secure tokens
+
+### events
+- Event-driven architecture
+- Custom event emitters
+- Observer pattern
+
+### os
+- System information (CPU, memory, platform)
+- Network interfaces
+- Uptime statistics
+
+### querystring
+- Parse URL query strings
+- Stringify objects to query format
+
+### url
+- URL parsing (protocol, host, path, query)
+- URL formatting and resolution
+
+### util
+- promisify - Convert callbacks to promises
+- inspect - Object inspection
+- deprecate - Mark functions as deprecated
+
+## Usage Example
+```javascript
+const crypto = require('crypto');
+const hash = crypto.createHash('sha256').update('data').digest('hex');
+```

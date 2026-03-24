@@ -1,0 +1,38 @@
+# Notes for Assignments Folder
+
+## Overview
+This folder contains practical assignments and exercises to practice Express.js concepts.
+
+## Files
+
+### Route Assignments
+- **blogRoutes.js** - Dynamic blog routing with URL parameters
+  - Route pattern: `/blog/:year/:month/:slug`
+  - Demonstrates multiple URL parameters
+  - Month name mapping (01 -> January, etc.)
+  - Input validation for year format
+
+### Rendering Assignments
+- **contentRenderer.js** - Dynamic content rendering utility
+- **staticRenderer.js** - Static content rendering with template logic
+- **staticRoute.js** - Static file route handling
+
+## Key Concepts Practiced
+1. URL parameter extraction (`req.params`)
+2. Data validation
+3. Template rendering
+4. Static file serving
+
+## Example Usage
+```javascript
+// blogRoutes.js example URL:
+// http://localhost:3000/blog/2024/03/my-first-post
+// Output: Viewing blog post: "my-first-post" Published: March, 2024
+```
+
+## How to Run
+```bash
+node blogRoutes.js
+node staticRenderer.js
+node staticRoute.js
+```

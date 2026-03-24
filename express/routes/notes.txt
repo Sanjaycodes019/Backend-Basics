@@ -1,0 +1,19 @@
+# Notes for Express Routes Subfolder
+
+## Overview
+Demonstrates modular routing with separate route files for different resources.
+
+## Files
+- **baseRoute.js** - Base router setup and middleware
+- **index.js** - Route aggregator and entry point
+- **student.js** - Student resource routes
+- **teacher.js** - Teacher resource routes
+
+## Pattern
+Each route file exports an Express Router that handles specific resource endpoints.
+
+## Usage
+```javascript
+const routes = require('./routes');
+app.use('/api', routes);
+```

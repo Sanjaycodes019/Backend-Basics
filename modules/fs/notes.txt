@@ -1,0 +1,43 @@
+# Notes for FS Subfolder
+
+## Overview
+File System (fs) module examples demonstrating all file operations in Node.js.
+
+## Files
+
+### Basic Operations (01.js - 10.js)
+Progressive learning of fs operations:
+- **01.js** - Writing files (sync, async, promises)
+- **02.js** - Reading files
+- **03.js** - Appending to files
+- **04.js** - File deletion
+- **05.js** - Directory creation
+- **06.js** - Directory listing
+- **07.js** - File existence check
+- **08.js** - File copying
+- **09.js** - File renaming
+- **10.js** - File stats
+
+### Assignments
+- **assignment1.js - assignment12.js** - Practical exercises covering all fs concepts
+- **project1.js** - Real-world file system project
+- **z.js** - Advanced fs operations and utilities
+
+### Utilities
+- **copy.js** - File copy utility with error handling
+- **filefolder.js** - Directory traversal utility
+- **fs.js** - Core fs module reference
+
+### Sample Files
+- **demo3.txt, file.txt, file1.txt, file2.txt** - Test data files
+- **final.txt, greet.txt, thirdfile.txt** - Sample content files
+
+## Key Concepts
+- Synchronous vs Asynchronous operations
+- Promise-based API (fs.promises)
+- File descriptors
+- Streams and buffers
+- Path handling
+
+## Best Practice
+Use async/await with fs.promises for production code to avoid blocking the event loop.

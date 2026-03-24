@@ -1,0 +1,83 @@
+# Notes for Modules Folder
+
+## Overview
+This folder contains examples and exercises for Node.js core modules.
+
+## Subfolders
+
+### 1. additionalModules/
+Additional Node.js utility modules:
+- **crypto.js** - Cryptographic functions (hashing, encryption)
+- **events.js** - EventEmitter implementation
+- **os.js** - Operating system information
+- **querystring.js** - Query string parsing utilities
+- **url.js** - URL parsing and manipulation
+- **util.js** - Utility functions (promisify, etc.)
+- **01.txt** - Theory notes for additional modules
+
+### 2. assignments/
+Module-related assignments:
+- **index.html** - HTML interface for module exercises
+
+### 3. calculator-server/
+Full calculator application using core http module:
+- **calculate.js** - Calculator logic (add, sub, mul, div)
+- **index.html** - Calculator UI
+- **server.js** - HTTP server handling calculator operations
+
+### 4. fs/ (File System)
+Comprehensive fs module examples:
+- **01.js - 10.js** - Progressive file system operations
+  - Writing files (sync/async/promises)
+  - Reading files
+  - Appending files
+  - File deletion
+  - Directory operations
+  - File copying
+- **assignment1.js - assignment12.js** - Practical exercises
+- **project1.js** - File system project
+- **copy.js** - File copy utility
+- **filefolder.js** - Directory listing utility
+- **z.js** - Advanced fs operations
+- **Text files**: demo3.txt, file.txt, file1.txt, file2.txt, final.txt, greet.txt, thirdfile.txt (sample data files)
+
+### 5. http/ (HTTP Module)
+HTTP server implementations:
+- **01.js - 11.js** - Progressive HTTP server examples
+  - Basic server setup
+  - Routing
+  - Serving HTML
+  - Handling different HTTP methods
+- **assignment1.js - assignment4.js** - HTTP exercises
+- **task1.js - task4.js** - Practical tasks
+- **syntax.js** - HTTP syntax reference
+- **index.html, index1.html, login.html** - Sample HTML files
+- **sample.txt, style.css** - Static assets
+- **testpad/** - Testing ground with sub-examples
+  - html-server/, json-server/, post-json-server/
+
+### 6. path/ (Path Module)
+Path manipulation utilities:
+- **01.js** - Path operations (join, resolve, parse, etc.)
+- **assignment1.js** - Path module exercise
+
+## Key Learning Path
+1. Start with path module for file paths
+2. Learn fs for file operations
+3. Master http for server creation
+4. Explore additional utility modules
+
+## How to Run
+```bash
+# FS examples
+node fs/01.js
+
+# HTTP examples
+node http/01.js
+
+# Calculator server
+node calculator-server/server.js
+
+# Path examples
+node path/01.js
+```

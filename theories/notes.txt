@@ -1,0 +1,70 @@
+# Notes for Theories Folder
+
+## Overview
+This folder contains comprehensive theory notes and explanations for backend concepts covered in this repository.
+
+## Files
+
+### Theory Documents
+- **01.txt** - Core backend fundamentals (extensive)
+  - Client-server architecture
+  - HTTP request-response lifecycle
+  - Node.js introduction and working
+  - NPM and package management
+  - Express.js introduction
+  - Middleware concepts
+  - REST API basics
+  - Pagination concepts
+
+- **02.txt** - Advanced topics and deep dive
+  - Detailed Express.js patterns
+  - Advanced routing techniques
+  - Middleware implementation details
+
+- **02.js** - Practical examples for theory 02
+  - Code implementations matching the theory
+
+- **03.txt** - Additional theory (placeholder)
+
+### Supporting Files
+- **01.js** - Basic examples matching 01.txt theory
+- **02.js** - Advanced examples
+- **package.json** - Dependencies for running examples
+
+## Key Topics Covered in 01.txt
+
+### Client-Server Architecture
+- Request-Response cycle
+- DNS lookup process
+- HTTP methods (GET, POST, PUT, DELETE)
+- Server types (Static vs Dynamic)
+
+### Node.js Fundamentals
+- Single-threaded event loop
+- Non-blocking I/O
+- Core modules (http, fs, path, os, events)
+- NPM package management
+- package.json structure
+
+### Express.js
+- Why use Express (cleaner syntax, middleware, routing)
+- Basic server setup
+- Route handling
+- Query parameters, URL parameters, Request body
+- Middleware types and usage
+
+### REST API
+- REST principles
+- HTTP method mapping to CRUD operations
+- Pagination implementation
+
+## How to Use
+1. Read the theory files first for understanding
+2. Run the corresponding .js files to see practical examples
+3. Reference these while working on other folders
+
+## Study Order Recommended
+1. Start with 01.txt for fundamentals
+2. Run 01.js to see basics in action
+3. Move to 02.txt for advanced concepts
+4. Study 02.js for implementation patterns

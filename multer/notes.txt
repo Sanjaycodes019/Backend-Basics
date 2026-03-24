@@ -1,0 +1,67 @@
+# Notes for Multer Folder
+
+## Overview
+This folder demonstrates file upload handling using Multer middleware in Express.js.
+
+## Files
+
+### Learning Materials
+- **01.txt** - Theory notes explaining Multer concepts, configuration, and usage
+
+### Implementation Examples
+
+#### 01multer.js
+Basic single file upload:
+- Simple file upload endpoint
+- Stores files in 'uploads/' directory
+- Handles 'file.txt' field name
+
+#### 02multer.js
+Advanced file upload with:
+- Custom storage configuration
+- File filtering by type
+- File size limits
+- Multiple file handling
+
+#### 03multer.js
+Complete file upload solution with:
+- Advanced storage options
+- Error handling
+- File validation
+- Response formatting
+
+## Key Concepts
+
+### Multer Configuration
+```javascript
+const upload = multer({ 
+  dest: 'uploads/'  // Destination folder
+});
+```
+
+### Upload Methods
+- `upload.single(fieldname)` - Single file upload
+- `upload.array(fieldname, maxCount)` - Multiple files with same field name
+- `upload.fields(fields)` - Multiple files with different field names
+
+### File Information (req.file)
+- `originalname` - Original file name
+- `mimetype` - File MIME type
+- `size` - File size in bytes
+- `filename` - Stored file name
+- `path` - Storage path
+
+## How to Test
+1. Run: `node 01multer.js`
+2. Use Postman or curl to send POST request to `/upload`
+3. Include file in form-data with key matching the configured field name
+
+## Dependencies
+```json
+{
+  "dependencies": {
+    "express": "^4.x",
+    "multer": "^1.x"
+  }
+}
+```

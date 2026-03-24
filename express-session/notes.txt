@@ -1,0 +1,87 @@
+# Notes for Express-Session Folder
+
+## Overview
+This folder demonstrates session management in Express.js using express-session middleware.
+
+## Files
+
+### Main Implementation
+- **server.js** - Complete session management example
+  - Session configuration
+  - Login route (sets session)
+  - Dashboard route (checks session)
+  - Logout route (destroys session)
+
+### Practice
+- **practice/server.js** - Additional session practice exercises
+
+### Documentation
+- **session.txt** - Session concepts and configuration notes
+
+## Key Concepts
+
+### Session Configuration
+```javascript
+app.use(session({
+    secret: 'mysecretkey',      // Secret for signing session ID cookie
+    resave: false,              // Don't save session if unmodified
+    saveUninitialized: true,    // Save new sessions
+    cookie: {maxAge: 6000}      // Cookie expiration (6 seconds)
+}));
+```
+
+### Session Operations
+
+#### Setting Session Data
+```javascript
+req.session.username = "Sanjay";
+```
+
+#### Accessing Session Data
+```javascript
+if(req.session.username) {
+    res.send(`welcome back, ${req.session.username}`);
+}
+```
+
+#### Destroying Session
+```javascript
+req.session.destroy(() => {
+    res.send('logged out and session destroyed');
+});
+```
+
+## Routes
+
+| Route | Method | Description |
+|-------|--------|-------------|
+| /login | GET | Sets session data |
+| /dashboard | GET | Protected route, checks session |
+| /logout | GET | Destroys session |
+
+## How to Test
+```bash
+# Start server
+node server.js
+
+# 1. Visit http://localhost:3000/login (sets session)
+# 2. Visit http://localhost:3000/dashboard (accesses session)
+# 3. Visit http://localhost:3000/logout (destroys session)
+# 4. Visit /dashboard again (should redirect to login)
+```
+
+## Dependencies
+```json
+{
+  "dependencies": {
+    "express": "^4.x",
+    "express-session": "^1.x"
+  }
+}
+```
+
+## Use Cases
+- User authentication
+- Shopping cart persistence
+- Flash messages
+- Multi-step form data

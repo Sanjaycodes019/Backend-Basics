@@ -1,0 +1,53 @@
+# Notes for Blog-API Subfolder
+
+## Overview
+Complete RESTful Blog API with modular routing for posts and comments.
+
+## Files
+- **app.js** - Express application setup with route mounting
+- **package.json** - Project configuration and dependencies
+- **routes/posts.js** - Blog post routes (GET, POST, PUT, DELETE)
+- **routes/comments.js** - Comment routes for posts
+
+## API Endpoints
+
+### Posts
+```
+GET    /posts        - List all posts
+GET    /posts/:id    - Get specific post
+POST   /posts        - Create new post
+PUT    /posts/:id    - Update post
+DELETE /posts/:id    - Delete post
+```
+
+### Comments
+```
+GET    /comments        - List all comments
+GET    /comments/:id    - Get specific comment
+POST   /posts/:id/comments  - Add comment to post
+DELETE /comments/:id   - Delete comment
+```
+
+## Features
+- Modular route organization
+- In-memory data storage (for demo)
+- JSON request/response format
+- Proper HTTP status codes
+- Error handling
+
+## How to Run
+```bash
+npm install
+node app.js
+```
+
+## Example Requests
+```bash
+# Get all posts
+curl http://localhost:3000/posts
+
+# Create post
+curl -X POST -H "Content-Type: application/json" \
+  -d '{"title":"New Post","content":"Content"}' \
+  http://localhost:3000/posts
+```

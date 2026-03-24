@@ -1,0 +1,61 @@
+# Notes for HTTP Subfolder
+
+## Overview
+HTTP module examples demonstrating server creation and request handling without Express.
+
+## Files
+
+### Progressive Examples (01.js - 11.js)
+- **01.js** - Basic HTTP server setup
+- **02.js** - Routing based on URL path
+- **03.js** - Handling different HTTP methods
+- **04.js** - Serving HTML content
+- **05.js** - Serving JSON responses
+- **06.js** - Query parameter parsing
+- **07.js** - POST request handling with body parsing
+- **08.js** - Static file serving
+- **09.js** - URL parameter extraction
+- **10.js** - Request headers handling
+- **11.js** - Advanced routing patterns
+
+### Assignments
+- **assignment1.js - assignment4.js** - Practical HTTP server exercises
+- **task1.js - task4.js** - Specific task implementations
+
+### HTML Templates
+- **index.html** - Basic HTML template
+- **index1.html** - Extended HTML with forms
+- **login.html** - Login form example
+
+### Supporting Files
+- **sample.txt** - Sample text file for serving
+- **style.css** - CSS for styling (minimal)
+- **syntax.js** - HTTP syntax reference
+- **package.json** - Project dependencies
+
+### Testpad Subfolder
+Specialized server examples:
+- **html-server/** - HTML serving server
+- **json-server/** - JSON API server
+- **post-json-server/** - POST request handling server
+
+## Key Concepts
+- http.createServer()
+- Request (req) object - method, url, headers
+- Response (res) object - writeHead, end, statusCode
+- URL parsing
+- Query string handling
+- Body parsing for POST requests
+
+## Important Methods
+- req.on('data', callback) - Reading request body
+- req.on('end', callback) - Request complete
+- res.writeHead(status, headers) - Set response headers
+- res.end(data) - Send response and end connection
+
+## Why Learn HTTP Module?
+Understanding the core HTTP module helps you:
+- Appreciate what Express.js abstracts
+- Debug low-level issues
+- Create lightweight servers
+- Build custom protocols

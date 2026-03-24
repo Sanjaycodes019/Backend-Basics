@@ -1,0 +1,29 @@
+# Notes for Root Directory
+
+## Project Overview
+This is a comprehensive Node.js and Express.js learning repository covering backend basics from core modules to advanced Express features.
+
+## Structure
+
+### Main Folders
+
+1. **assignments/** - Practical assignments and exercises
+2. **express/** - Express.js fundamentals and examples
+3. **express-session/** - Session management with Express
+4. **express-static-demo/** - Static file serving examples
+5. **modular-routing/** - Advanced routing patterns
+6. **modules/** - Core Node.js modules (http, fs, path, etc.)
+7. **multer/** - File upload handling
+8. **pagination/** - Data pagination implementation
+9. **theories/** - Theory notes and explanations
+
+## Technology Stack
+- Node.js
+- Express.js
+- Multer (file uploads)
+- express-session (session management)
+
+## How to Use
+1. Navigate to any folder
+2. Run `npm install` if package.json exists
+3. Run `node filename.js` to execute

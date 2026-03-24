@@ -1,0 +1,45 @@
+# Notes for Path Subfolder
+
+## Overview
+Path module examples demonstrating file path manipulation utilities.
+
+## Files
+- **01.js** - Complete path operations guide
+  - path.join() - Join path segments
+  - path.resolve() - Resolve absolute path
+  - path.parse() - Parse path into components
+  - path.basename() - Get file name
+  - path.dirname() - Get directory name
+  - path.extname() - Get file extension
+  - path.normalize() - Normalize path
+  - path.isAbsolute() - Check if path is absolute
+  - path.relative() - Get relative path
+
+- **assignment1.js** - Path module exercise
+
+## Key Methods
+
+### path.join()
+Joins path segments with proper separators:
+```javascript
+path.join('/foo', 'bar', 'baz'); // /foo/bar/baz
+```
+
+### path.resolve()
+Resolves to absolute path:
+```javascript
+path.resolve('file.txt'); // /current/dir/file.txt
+```
+
+### path.parse()
+Breaks path into components:
+```javascript
+path.parse('/home/user/file.txt');
+// { root: '/', dir: '/home/user', base: 'file.txt', ext: '.txt', name: 'file' }
+```
+
+## Why Important?
+- Cross-platform compatibility (Windows vs Unix paths)
+- Avoid hardcoded separators
+- Safe path construction
+- Working with file uploads and static assets

@@ -1,0 +1,63 @@
+# Notes for Express Folder
+
+## Overview
+This folder contains Express.js fundamentals with progressive examples from basic server setup to advanced routing.
+
+## Files Breakdown
+
+### Basic Server Examples
+- **01.js** - Basic Express server setup with single route
+- **02.js** - Route parameters demonstration
+- **03.js** - Query parameters handling
+- **04.js** - POST request handling with req.body
+- **05.js** - Middleware usage examples
+- **06.js** - Multiple route handlers
+- **07.js** - Advanced routing patterns
+- **08.js** - Error handling middleware
+
+### Route Organization
+- **routing.js** - Complete routing example with multiple endpoints
+- **servehtml.js** - Serving HTML files with Express
+
+### Routes Subfolder
+- **baseRoute.js** - Base router configuration
+- **index.js** - Main route entry point
+- **student.js** - Student-related routes
+- **teacher.js** - Teacher-related routes
+
+### REST API Subfolder
+- **01.js** - REST API basic implementation
+- **index.js** - REST API entry point
+- **task.txt** - REST API tasks and exercises
+
+### Other Files
+- **classwork.js** - Class exercise file
+- **task1.js** - Task assignment solution
+- **index.html** - Sample HTML file for serving
+- **middleware.txt** - Middleware concepts documentation
+- **01.txt** - Express theory notes
+
+## Key Concepts Covered
+1. Basic server setup
+2. Route parameters (req.params)
+3. Query strings (req.query)
+4. Request body parsing (req.body)
+5. Middleware (application-level, route-level, built-in, third-party)
+6. Static file serving
+7. Router modularization
+
+## Dependencies
+```json
+{
+  "dependencies": {
+    "express": "^4.x"
+  }
+}
+```
+
+## Running Examples
+```bash
+node 01.js
+node routing.js
+# etc...
+```

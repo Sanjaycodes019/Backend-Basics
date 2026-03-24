@@ -1,0 +1,154 @@
+EXPRESS.JS - QUICK REVISION NOTES
+=================================
+
+WHAT IS EXPRESS?
+----------------
+• Minimal, fast web framework for Node.js
+• Makes creating servers easier
+• Built-in routing and middleware
+
+BASIC SERVER
+------------
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+    res.send('Hello World');
+});
+
+app.listen(3000);
+
+ROUTING
+-------
+app.get('/path', handler)      → GET request
+app.post('/path', handler)     → POST request
+app.put('/path', handler)      → PUT request
+app.delete('/path', handler)   → DELETE request
+app.all('/path', handler)        → All methods
+
+REQUEST OBJECT (req)
+--------------------
+req.params.id       → URL params (/user/:id)
+req.query.search    → Query (?search=term)
+req.body            → POST body (needs middleware)
+req.headers         → Request headers
+req.url             → URL path
+req.method          → HTTP method
+
+RESPONSE OBJECT (res)
+---------------------
+res.send(data)         → Send text/html
+res.json(obj)          → Send JSON
+res.status(404)        → Set status code
+res.redirect('/url')   → Redirect
+res.sendStatus(200)    → Send status only
+
+URL PARAMETERS
+--------------
+// URL: /user/123
+app.get('/user/:id', (req, res) => {
+    const id = req.params.id;  // "123"
+});
+
+// Multiple params
+// URL: /blog/2024/03/post
+app.get('/blog/:year/:month/:slug', (req, res) => {
+    const { year, month, slug } = req.params;
+});
+
+QUERY PARAMETERS
+----------------
+// URL: /search?q=node&limit=10
+app.get('/search', (req, res) => {
+    const q = req.query.q;        // "node"
+    const limit = req.query.limit; // "10"
+});
+
+REQUEST BODY
+-----------
+// Need middleware first!
+app.use(express.json());          // For JSON
+app.use(express.urlencoded());    // For forms
+
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+});
+
+MIDDLEWARE
+----------
+Function running between request and response.
+
+app.use((req, res, next) => {
+    console.log(req.method, req.url);
+    next();  // Pass to next middleware
+});
+
+BUILT-IN MIDDLEWARE:
+app.use(express.json())           → Parse JSON body
+app.use(express.urlencoded())       → Parse form data
+app.use(express.static('public'))   → Serve static files
+
+ERROR HANDLER (4 params!)
+--------------------------
+app.use((err, req, res, next) => {
+    res.status(500).send(err.message);
+});
+
+STATIC FILES
+------------
+app.use(express.static('public'));
+// public/style.css → /style.css
+// public/index.html → /index.html
+
+MODULAR ROUTING
+---------------
+// routes/users.js
+const router = require('express').Router();
+router.get('/', (req, res) => {...});
+module.exports = router;
+
+// app.js
+const users = require('./routes/users');
+app.use('/users', users);
+// Creates: GET /users
+
+CHAINING
+--------
+res.status(201).json({ message: 'Created' });
+
+ENVIRONMENT
+-----------
+process.env.PORT || 3000
+process.env.NODE_ENV === 'development'
+
+STARTER TEMPLATE
+----------------
+const express = require('express');
+const app = express();
+
+app.use(express.json());
+app.use(express.static('public'));
+
+app.get('/', (req, res) => {
+    res.send('Hello');
+});
+
+app.use((err, req, res, next) => {
+    res.status(500).send(err.message);
+});
+
+app.listen(3000);
+
+QUICK CHECKLIST
+---------------
+□ app = express() creates app
+□ app.listen() starts server
+□ req.params for URL segments
+□ req.query for query strings  
+□ req.body needs express.json()
+□ res.json() sends JSON
+□ res.status() sets code
+□ app.use() for middleware
+□ next() passes to next middleware
+□ Error handler has (err, req, res, next)
+□ express.static() serves files

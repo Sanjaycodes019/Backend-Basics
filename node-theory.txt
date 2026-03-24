@@ -1,0 +1,111 @@
+NODE.JS - QUICK REVISION NOTES
+==============================
+
+WHAT IS NODE.JS?
+----------------
+• JavaScript runtime built on Chrome's V8 engine
+• Runs JS outside browser (servers, CLI tools)
+• Event-driven, non-blocking I/O
+• Single-threaded with event loop
+
+CORE CONCEPTS
+-------------
+SYNC (Blocking):      Waits for operation, line-by-line
+ASYNC (Non-blocking): Doesn't wait, uses callbacks/promises
+
+EVENT LOOP PHASES:
+1. Timers (setTimeout, setInterval)
+2. I/O Callbacks
+3. Poll (I/O events)
+4. Check (setImmediate)
+5. Close
+
+CORE MODULES
+------------
+fs      → File operations (read, write, delete)
+http    → Create web servers
+path    → File path handling
+os      → System info (CPU, memory)
+events  → EventEmitter pattern
+url     → URL parsing
+querystring → Query string parse
+crypto  → Hashing, encryption
+
+FILE SYSTEM - fs
+----------------
+fs.readFileSync(path)        → Sync read
+fs.readFile(path, callback)  → Async read
+fs.writeFileSync(path, data) → Sync write
+fs.appendFileSync(path, data)→ Append to file
+fs.unlinkSync(path)          → Delete file
+fs.mkdirSync(path)           → Create folder
+fs.existsSync(path)          → Check exists
+
+HTTP MODULE
+-----------
+const server = http.createServer((req, res) => {
+    // req.url     → '/users'
+    // req.method  → 'GET', 'POST'
+    // req.headers → request headers
+    
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.end('Hello');
+});
+server.listen(3000);
+
+PATH MODULE
+-----------
+path.join(__dirname, 'folder', 'file')  → Combine paths
+path.resolve('file')                    → Absolute path
+path.parse('/home/file.txt')            → Break into parts
+path.basename('/home/file.txt')         → 'file.txt'
+path.extname('/home/file.txt')          → '.txt'
+
+NPM COMMANDS
+------------
+npm init -y              → Create package.json
+npm install express      → Install package
+npm install -g nodemon     → Install globally
+npm install --save-dev jest→ Dev dependency
+npm start                → Run start script
+npm run dev              → Run custom script
+
+IMPORTANT VARIABLES
+-------------------
+__dirname   → Current file's directory
+__filename  → Current file's full path
+process.env → Environment variables
+process.argv→ Command line arguments
+
+MODULE EXPORTS
+--------------
+// Export
+module.exports = { func1, func2 };
+// Import
+const { func1 } = require('./file');
+
+ERROR HANDLING
+--------------
+// Async/Await
+try {
+    const data = await operation();
+} catch (err) {
+    console.error(err);
+}
+
+// Callback
+fs.readFile('file', (err, data) => {
+    if (err) return console.error(err);
+    console.log(data);
+});
+
+QUICK CHECKLIST
+---------------
+□ Node runs on V8 engine
+□ Non-blocking = async operations
+□ Event loop handles callbacks
+□ Core: fs, http, path
+□ Sync blocks, Async doesn't
+□ __dirname = file directory
+□ npm init -y for package.json
+□ module.exports to share code

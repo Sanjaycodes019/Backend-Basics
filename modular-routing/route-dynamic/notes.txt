@@ -1,0 +1,22 @@
+# Notes for Route-Dynamic Subfolder
+
+## Overview
+Demonstrates dynamic routing with URL parameters and patterns.
+
+## Files
+- **app.js** - Application setup
+- **routes/products.js** - Product routes with dynamic parameters
+
+## Features
+- Dynamic route parameters (`:id`)
+- Complex route patterns
+- Nested routes (`/products/:id/reviews`)
+- Parameter validation
+
+## Example Routes
+```
+GET    /products          - List all products
+GET    /products/:id       - Get product by ID
+GET    /products/:id/reviews - Get product reviews
+POST   /products          - Create new product
+```

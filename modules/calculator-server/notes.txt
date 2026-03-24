@@ -1,0 +1,51 @@
+# Notes for Calculator-Server Subfolder
+
+## Overview
+A complete calculator application built using only Node.js core modules (no Express).
+
+## Files
+- **calculate.js** - Calculator logic module
+  - add(num1, num2) - Addition
+  - sub(num1, num2) - Subtraction
+  - mul(num1, num2) - Multiplication
+  - div(num1, num2) - Division (with zero check)
+
+- **index.html** - Calculator web interface
+  - Form for inputting numbers
+  - Operation selection
+  - Result display
+
+- **server.js** - HTTP server handling calculator operations
+  - GET endpoints for addition and subtraction
+  - POST endpoints for multiplication and division
+  - Query parameter parsing
+  - Body parsing for POST requests
+  - Error handling for invalid inputs
+
+## How It Works
+
+### GET Operations (add, sub)
+```
+GET /add?num1=5&num2=3
+GET /sub?num1=10&num2=4
+```
+
+### POST Operations (mul, div)
+```
+POST /mul (body: num1=6&num2=7)
+POST /div (body: num1=20&num2=4)
+```
+
+## Architecture
+1. Client fills form in index.html
+2. Form submits to server via GET or POST
+3. Server extracts numbers from query/body
+4. Server calls calculate.js functions
+5. Server returns result to client
+
+## Key Learning Points
+- HTTP module vs Express comparison
+- GET vs POST handling
+- Query string parsing with URL class
+- Body parsing for POST data
+- Error handling in vanilla Node.js
